@@ -1,0 +1,36 @@
+<ion-header no-border>
+
+  <ion-navbar transparent>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Exhortations</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content fullscreen *ngIf="exhortations">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-fab right top edge>
+    <button ion-fab class="pop-in styleFab" color="dark" (click)="clickMainFAB()">
+        FONT
+    </button>
+    <ion-fab-list>
+      <button ion-fab class="styleFab" (click)="increaseFontSize()"><ion-icon name="add"></ion-icon></button>
+      <button ion-fab class="styleFab" (click)="decreaseFontSize()"><ion-icon name="remove"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>
+  <div id="wrapper">
+    <ion-slides #slider pager="true" paginationType="fraction" loop="true" effect="slide" direction="horizontal">
+      <ion-slide *ngFor="let exhortation of exhortations">
+        
+          <ion-card-content>
+            <h2 [style.font-size.rem]="fontSize*1.4" text-left [innerHTML]="exhortation.title"></h2>
+            <p [style.font-size.rem]="fontSize" text-left [innerHTML]="exhortation.fulltext"></p>
+          </ion-card-content>
+
+      </ion-slide>
+    </ion-slides>
+  </div>
+</ion-content>
